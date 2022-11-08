@@ -12,8 +12,8 @@
   DTS:ObjectName="s304192"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="10"
-  DTS:VersionGUID="{6F3077CB-621C-44A9-90AC-BF4460567FF5}">
+  DTS:VersionBuild="11"
+  DTS:VersionGUID="{A1009A36-8569-4D9D-AC2F-30587813DE06}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -96,11 +96,7 @@
       DTS:ObjectName="PostgreSQL30">
       <DTS:ObjectData>
         <DTS:ConnectionManager
-          DTS:ConnectionString="uid=postgres;Dsn=PostgreSQL30;">
-          <DTS:Password
-            DTS:Name="pwd"
-            Sensitive="1"></DTS:Password>
-        </DTS:ConnectionManager>
+          DTS:ConnectionString="uid=postgres;Dsn=PostgreSQL30;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -171,7 +167,7 @@
                       refId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].Columns[AverageRate]"
                       cachedDataType="r8"
                       cachedName="AverageRate"
-                      cachedSortKeyPosition="-1"
+                      cachedSortKeyPosition="-2"
                       externalMetadataColumnId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[AverageRate]"
                       lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[AverageRate]" />
                     <inputColumn
@@ -184,6 +180,7 @@
                       refId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].Columns[Date]"
                       cachedDataType="dbTimeStamp"
                       cachedName="Date"
+                      cachedSortKeyPosition="1"
                       externalMetadataColumnId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Date]"
                       lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[Date]" />
                   </inputColumns>
@@ -339,7 +336,7 @@
                       refId="Package\Data Flow Task\ODBC Destination.Inputs[ODBC Destination Input].Columns[AverageRate]"
                       cachedDataType="r8"
                       cachedName="AverageRate"
-                      cachedSortKeyPosition="-1"
+                      cachedSortKeyPosition="-2"
                       externalMetadataColumnId="Package\Data Flow Task\ODBC Destination.Inputs[ODBC Destination Input].ExternalColumns[ar]"
                       lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[AverageRate]" />
                     <inputColumn
@@ -352,6 +349,7 @@
                       refId="Package\Data Flow Task\ODBC Destination.Inputs[ODBC Destination Input].Columns[Date]"
                       cachedDataType="dbTimeStamp"
                       cachedName="Date"
+                      cachedSortKeyPosition="1"
                       externalMetadataColumnId="Package\Data Flow Task\ODBC Destination.Inputs[ODBC Destination Input].ExternalColumns[dt]"
                       lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[Date]" />
                   </inputColumns>
@@ -652,7 +650,7 @@
                         <property
                           dataType="System.Int32"
                           description="Specifies the sort order of the column."
-                          name="NewSortKeyPosition">-1</property>
+                          name="NewSortKeyPosition">-2</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
@@ -684,7 +682,7 @@
                         <property
                           dataType="System.Int32"
                           description="Specifies the sort order of the column."
-                          name="NewSortKeyPosition">0</property>
+                          name="NewSortKeyPosition">1</property>
                       </properties>
                     </inputColumn>
                   </inputColumns>
@@ -728,7 +726,7 @@
                       dataType="r8"
                       lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[AverageRate]"
                       name="AverageRate"
-                      sortKeyPosition="-1">
+                      sortKeyPosition="-2">
                       <properties>
                         <property
                           containsID="true"
@@ -754,7 +752,8 @@
                       refId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[Date]"
                       dataType="dbTimeStamp"
                       lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[Date]"
-                      name="Date">
+                      name="Date"
+                      sortKeyPosition="1">
                       <properties>
                         <property
                           containsID="true"
