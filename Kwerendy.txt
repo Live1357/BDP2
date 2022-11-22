@@ -1,0 +1,8 @@
+1) MS SQL Server
+SELECT * FROM information_schema.columns WHERE table_name = 'FactInternetSales';
+2) Oracle
+SELECT * FROM ALL_TAB_COLUMNS WHERE TABLE_NAME = 'FactInternetSales';
+3) PostgreSQL
+SELECT * FROM information_schema.columns WHERE table_name = 'FactInternetSales';
+4) MySQL
+SHOW FULL COLUMNS FROM FactInternetSales;
