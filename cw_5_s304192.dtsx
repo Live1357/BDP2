@@ -12,8 +12,8 @@
   DTS:ObjectName="s304192"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="18"
-  DTS:VersionGUID="{C32A785A-B6AB-4460-9F97-44C6C78A44F6}">
+  DTS:VersionBuild="21"
+  DTS:VersionGUID="{769B07D1-03A0-4B29-9F5B-78A25397FB6A}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -1541,6 +1541,7 @@ where [refTable].[CurrencyKey] = ?</property>
       DTS:refId="Package\cw4"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Data Flow Task"
+      DTS:Disabled="True"
       DTS:DTSID="{57E9EE57-0217-40DB-A82B-25A79825B37C}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
@@ -3137,6 +3138,897 @@ where [refTable].[CurrencyKey] = ?</property>
         </pipeline>
       </DTS:ObjectData>
     </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\cw5"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{13259994-028F-4D83-B99C-16D848D1D79D}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="cw5"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\cw5\Aggregate"
+              componentClassID="Microsoft.Aggregate"
+              contactInfo="Aggregate;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;3"
+              description="Aggregates data with functions such as Average, Sum, Count, Max, and Min. For example, group data to compute the sum of sales per product or the average visits per day."
+              name="Aggregate"
+              version="3">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the approximate number of group by keys that the aggregation produces. Low indicates 500,000 key values, Medium indicates 5 million key values, and High indicates more than 25 million key values. Unspecified indicates no KeyScale value is used."
+                  name="KeyScale"
+                  typeConverter="KeyScaleType">0</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the exact number of group by keys that the aggregation produces. If a KeyScale value is specified, the value in Keys takes precedence."
+                  name="Keys" />
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the approximate number of distinct values in a column that the aggregation counts distinctly. Low indicates 500,000 key values, Medium indicates 5 million key values, and High indicates more than 25 million key values. Unspecified indicates no CountDistinctScale value is used."
+                  name="CountDistinctScale"
+                  typeConverter="KeyScaleType">0</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the exact number of distinct values in a column that the aggregation counts distinctly. If a CountDistinctScale value is specified, the value in CountDistinctKeys takes precedence."
+                  name="CountDistinctKeys" />
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage by which memory can be extended during the aggregation. Valid values are between 1 and 100."
+                  name="AutoExtendFactor">25</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\cw5\Aggregate.Inputs[Aggregate Input 1]"
+                  name="Aggregate Input 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\cw5\Aggregate.Inputs[Aggregate Input 1].Columns[Orders_cnt]"
+                      cachedDataType="ui4"
+                      cachedName="Orders_cnt"
+                      lineageId="Package\cw5\Data Conversion.Outputs[Data Conversion Output].Columns[Orders_cnt]" />
+                    <inputColumn
+                      refId="Package\cw5\Aggregate.Inputs[Aggregate Input 1].Columns[OrderDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="OrderDate"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[OrderDate]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\cw5\Aggregate.Outputs[Aggregate Output 1]"
+                  name="Aggregate Output 1">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the approximate number of group by keys that the aggregation produces. Low indicates 500,000 key values, Medium indicates 5 million key values, and High indicates more than 25 million key values. Unspecified indicates no KeyScale value is used."
+                      name="KeyScale"
+                      typeConverter="KeyScaleType">0</property>
+                    <property
+                      dataType="System.Null"
+                      description="Specifies the exact number of group by keys that the aggregation produces. If a KeyScale value is specified, the value in Keys takes precedence."
+                      name="Keys" />
+                  </properties>
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\cw5\Aggregate.Outputs[Aggregate Output 1].Columns[Orders_cnt]"
+                      dataType="ui8"
+                      lineageId="Package\cw5\Aggregate.Outputs[Aggregate Output 1].Columns[Orders_cnt]"
+                      name="Orders_cnt">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\cw5\Data Conversion.Outputs[Data Conversion Output].Columns[Orders_cnt]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\cw5\Aggregate.Outputs[Aggregate Output 1].Columns[OrderDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\cw5\Aggregate.Outputs[Aggregate Output 1].Columns[OrderDate]"
+                      name="OrderDate">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the ID of the input column used in the aggregation."
+                          name="AggregationColumnId">#{Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[OrderDate]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the type of aggregation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indicates whether the column requires special handling because it may contain oversized data or it requires precision beyond a float data type."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the string comparison options."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\cw5\Copy Column"
+              componentClassID="Microsoft.CopyMap"
+              contactInfo="Copy Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Copies input columns to new columns in the transformation output. For example, create a copy of the 'address' column so that it can be cleaned by subsequent transformations and leave the original column in place for auditing."
+              name="Copy Column">
+              <inputs>
+                <input
+                  refId="Package\cw5\Copy Column.Inputs[Copy Column Input]"
+                  name="Copy Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\cw5\Copy Column.Outputs[Copy Column Output]"
+                  name="Copy Column Output"
+                  synchronousInputId="Package\cw5\Copy Column.Inputs[Copy Column Input]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\cw5\Data Conversion"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\cw5\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\cw5\Data Conversion.Inputs[Data Conversion Input].Columns[OrderDateKey]"
+                      cachedDataType="i4"
+                      cachedName="OrderDateKey"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[OrderDateKey]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\cw5\Data Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\cw5\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\cw5\Data Conversion.Outputs[Data Conversion Output].Columns[Orders_cnt]"
+                      dataType="ui4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\cw5\Data Conversion.Outputs[Data Conversion Output].Columns[Orders_cnt]"
+                      name="Orders_cnt"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[OrderDateKey]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\cw5\Data Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\cw5\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\cw5\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\cw5\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\cw5\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\cw5\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\cw5\ODBC Source"
+              componentClassID="Microsoft.SSISODBCSrc"
+              contactInfo="ODBC Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="ODBC Source"
+              name="ODBC Source"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="The name of the table to be fetched."
+                  expressionType="Notify"
+                  name="TableName">"dbo"."FactInternetSales"</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the number of rows fetched per batch."
+                  expressionType="Notify"
+                  name="BatchSize">1000</property>
+                <property
+                  dataType="System.Int32"
+                  description="Determines the chunk size allocation for LOB columns"
+                  expressionType="Notify"
+                  name="LobChunkSize">32768</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines how the component exposes CHAR columns. If False, CHAR columns are exposed as (multi-)byte strings (DT_STR), if True, CHAR columns are exposed as wide strings (DT_WSTR)"
+                  expressionType="Notify"
+                  name="ExposeCharColumnsAsUnicode">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds to wait for an SQL statement to execute before returning to the application."
+                  expressionType="Notify"
+                  name="StatementTimeout">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="The code page to use when code page information is unavailable from the data source."
+                  expressionType="Notify"
+                  name="DefaultCodePage">1250</property>
+                <property
+                  dataType="System.Int32"
+                  description="The method used for fetching data."
+                  expressionType="Notify"
+                  name="FetchMethod">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="The ODBC C data type for binding numeric data."
+                  expressionType="Notify"
+                  name="BindNumericAs">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Determines how the component would bind columns of (multi)-byte string types (i.e., SQL_CHAR, SQL_VARCHAR, SQL_LONGVARCHAR). The options are: Unicode (SQL_C_WCHAR) and ANSI (SQL_C_CHAR)."
+                  expressionType="Notify"
+                  name="BindCharColumnsAs">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="The mode used to access the database."
+                  expressionType="Notify"
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\cw5\ODBC Source.Connections[ODBCConnection]"
+                  connectionManagerID="Package.ConnectionManagers[SSMS]"
+                  connectionManagerRefId="Package.ConnectionManagers[SSMS]"
+                  description="The ODBC runtime connection used to access the database."
+                  name="ODBCConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\cw5\ODBC Source.Outputs[ODBC Source Output]"
+                  errorRowDisposition="FailComponent"
+                  name="ODBC Source Output"
+                  truncationRowDisposition="FailComponent">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[ProductKey]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[ProductKey]"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[ProductKey]"
+                      name="ProductKey" />
+                    <outputColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[OrderDateKey]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[OrderDateKey]"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[OrderDateKey]"
+                      name="OrderDateKey" />
+                    <outputColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[DueDateKey]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[DueDateKey]"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[DueDateKey]"
+                      name="DueDateKey" />
+                    <outputColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[ShipDateKey]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[ShipDateKey]"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[ShipDateKey]"
+                      name="ShipDateKey" />
+                    <outputColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[CustomerKey]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[CustomerKey]"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[CustomerKey]"
+                      name="CustomerKey" />
+                    <outputColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[PromotionKey]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[PromotionKey]"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[PromotionKey]"
+                      name="PromotionKey" />
+                    <outputColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[CurrencyKey]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[CurrencyKey]"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[CurrencyKey]"
+                      name="CurrencyKey" />
+                    <outputColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[SalesTerritoryKey]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[SalesTerritoryKey]"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[SalesTerritoryKey]"
+                      name="SalesTerritoryKey" />
+                    <outputColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[SalesOrderNumber]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[SalesOrderNumber]"
+                      length="20"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[SalesOrderNumber]"
+                      name="SalesOrderNumber" />
+                    <outputColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[SalesOrderLineNumber]"
+                      dataType="ui1"
+                      externalMetadataColumnId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[SalesOrderLineNumber]"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[SalesOrderLineNumber]"
+                      name="SalesOrderLineNumber" />
+                    <outputColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[RevisionNumber]"
+                      dataType="ui1"
+                      externalMetadataColumnId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[RevisionNumber]"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[RevisionNumber]"
+                      name="RevisionNumber" />
+                    <outputColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[OrderQuantity]"
+                      dataType="i2"
+                      externalMetadataColumnId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[OrderQuantity]"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[OrderQuantity]"
+                      name="OrderQuantity" />
+                    <outputColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[UnitPrice]"
+                      dataType="cy"
+                      externalMetadataColumnId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[UnitPrice]"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[UnitPrice]"
+                      name="UnitPrice" />
+                    <outputColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[ExtendedAmount]"
+                      dataType="cy"
+                      externalMetadataColumnId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[ExtendedAmount]"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[ExtendedAmount]"
+                      name="ExtendedAmount" />
+                    <outputColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[UnitPriceDiscountPct]"
+                      dataType="r8"
+                      externalMetadataColumnId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[UnitPriceDiscountPct]"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[UnitPriceDiscountPct]"
+                      name="UnitPriceDiscountPct" />
+                    <outputColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[DiscountAmount]"
+                      dataType="r8"
+                      externalMetadataColumnId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[DiscountAmount]"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[DiscountAmount]"
+                      name="DiscountAmount" />
+                    <outputColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[ProductStandardCost]"
+                      dataType="cy"
+                      externalMetadataColumnId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[ProductStandardCost]"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[ProductStandardCost]"
+                      name="ProductStandardCost" />
+                    <outputColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[TotalProductCost]"
+                      dataType="cy"
+                      externalMetadataColumnId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[TotalProductCost]"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[TotalProductCost]"
+                      name="TotalProductCost" />
+                    <outputColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[SalesAmount]"
+                      dataType="cy"
+                      externalMetadataColumnId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[SalesAmount]"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[SalesAmount]"
+                      name="SalesAmount" />
+                    <outputColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[TaxAmt]"
+                      dataType="cy"
+                      externalMetadataColumnId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[TaxAmt]"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[TaxAmt]"
+                      name="TaxAmt" />
+                    <outputColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[Freight]"
+                      dataType="cy"
+                      externalMetadataColumnId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[Freight]"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[Freight]"
+                      name="Freight" />
+                    <outputColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[CarrierTrackingNumber]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[CarrierTrackingNumber]"
+                      length="25"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[CarrierTrackingNumber]"
+                      name="CarrierTrackingNumber" />
+                    <outputColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[CustomerPONumber]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[CustomerPONumber]"
+                      length="25"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[CustomerPONumber]"
+                      name="CustomerPONumber" />
+                    <outputColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[OrderDate]"
+                      dataType="dbTimeStamp"
+                      externalMetadataColumnId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[OrderDate]"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[OrderDate]"
+                      name="OrderDate" />
+                    <outputColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[DueDate]"
+                      dataType="dbTimeStamp"
+                      externalMetadataColumnId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[DueDate]"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[DueDate]"
+                      name="DueDate" />
+                    <outputColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[ShipDate]"
+                      dataType="dbTimeStamp"
+                      externalMetadataColumnId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[ShipDate]"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].Columns[ShipDate]"
+                      name="ShipDate" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[ProductKey]"
+                      dataType="i4"
+                      name="ProductKey" />
+                    <externalMetadataColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[OrderDateKey]"
+                      dataType="i4"
+                      name="OrderDateKey" />
+                    <externalMetadataColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[DueDateKey]"
+                      dataType="i4"
+                      name="DueDateKey" />
+                    <externalMetadataColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[ShipDateKey]"
+                      dataType="i4"
+                      name="ShipDateKey" />
+                    <externalMetadataColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[CustomerKey]"
+                      dataType="i4"
+                      name="CustomerKey" />
+                    <externalMetadataColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[PromotionKey]"
+                      dataType="i4"
+                      name="PromotionKey" />
+                    <externalMetadataColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[CurrencyKey]"
+                      dataType="i4"
+                      name="CurrencyKey" />
+                    <externalMetadataColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[SalesTerritoryKey]"
+                      dataType="i4"
+                      name="SalesTerritoryKey" />
+                    <externalMetadataColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[SalesOrderNumber]"
+                      dataType="wstr"
+                      length="20"
+                      name="SalesOrderNumber" />
+                    <externalMetadataColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[SalesOrderLineNumber]"
+                      dataType="ui1"
+                      name="SalesOrderLineNumber" />
+                    <externalMetadataColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[RevisionNumber]"
+                      dataType="ui1"
+                      name="RevisionNumber" />
+                    <externalMetadataColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[OrderQuantity]"
+                      dataType="i2"
+                      name="OrderQuantity" />
+                    <externalMetadataColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[UnitPrice]"
+                      dataType="cy"
+                      name="UnitPrice" />
+                    <externalMetadataColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[ExtendedAmount]"
+                      dataType="cy"
+                      name="ExtendedAmount" />
+                    <externalMetadataColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[UnitPriceDiscountPct]"
+                      dataType="r8"
+                      name="UnitPriceDiscountPct" />
+                    <externalMetadataColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[DiscountAmount]"
+                      dataType="r8"
+                      name="DiscountAmount" />
+                    <externalMetadataColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[ProductStandardCost]"
+                      dataType="cy"
+                      name="ProductStandardCost" />
+                    <externalMetadataColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[TotalProductCost]"
+                      dataType="cy"
+                      name="TotalProductCost" />
+                    <externalMetadataColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[SalesAmount]"
+                      dataType="cy"
+                      name="SalesAmount" />
+                    <externalMetadataColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[TaxAmt]"
+                      dataType="cy"
+                      name="TaxAmt" />
+                    <externalMetadataColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[Freight]"
+                      dataType="cy"
+                      name="Freight" />
+                    <externalMetadataColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[CarrierTrackingNumber]"
+                      dataType="wstr"
+                      length="25"
+                      name="CarrierTrackingNumber" />
+                    <externalMetadataColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[CustomerPONumber]"
+                      dataType="wstr"
+                      length="25"
+                      name="CustomerPONumber" />
+                    <externalMetadataColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[OrderDate]"
+                      dataType="dbTimeStamp"
+                      name="OrderDate" />
+                    <externalMetadataColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[DueDate]"
+                      dataType="dbTimeStamp"
+                      name="DueDate" />
+                    <externalMetadataColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[ShipDate]"
+                      dataType="dbTimeStamp"
+                      name="ShipDate" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output]"
+                  isErrorOut="true"
+                  name="ODBC Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[ProductKey]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[ProductKey]"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[ProductKey]"
+                      name="ProductKey" />
+                    <outputColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[OrderDateKey]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[OrderDateKey]"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[OrderDateKey]"
+                      name="OrderDateKey" />
+                    <outputColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[DueDateKey]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[DueDateKey]"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[DueDateKey]"
+                      name="DueDateKey" />
+                    <outputColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[ShipDateKey]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[ShipDateKey]"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[ShipDateKey]"
+                      name="ShipDateKey" />
+                    <outputColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[CustomerKey]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[CustomerKey]"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[CustomerKey]"
+                      name="CustomerKey" />
+                    <outputColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[PromotionKey]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[PromotionKey]"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[PromotionKey]"
+                      name="PromotionKey" />
+                    <outputColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[CurrencyKey]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[CurrencyKey]"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[CurrencyKey]"
+                      name="CurrencyKey" />
+                    <outputColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[SalesTerritoryKey]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[SalesTerritoryKey]"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[SalesTerritoryKey]"
+                      name="SalesTerritoryKey" />
+                    <outputColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[SalesOrderNumber]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[SalesOrderNumber]"
+                      length="20"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[SalesOrderNumber]"
+                      name="SalesOrderNumber" />
+                    <outputColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[SalesOrderLineNumber]"
+                      dataType="ui1"
+                      externalMetadataColumnId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[SalesOrderLineNumber]"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[SalesOrderLineNumber]"
+                      name="SalesOrderLineNumber" />
+                    <outputColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[RevisionNumber]"
+                      dataType="ui1"
+                      externalMetadataColumnId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[RevisionNumber]"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[RevisionNumber]"
+                      name="RevisionNumber" />
+                    <outputColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[OrderQuantity]"
+                      dataType="i2"
+                      externalMetadataColumnId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[OrderQuantity]"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[OrderQuantity]"
+                      name="OrderQuantity" />
+                    <outputColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[UnitPrice]"
+                      dataType="cy"
+                      externalMetadataColumnId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[UnitPrice]"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[UnitPrice]"
+                      name="UnitPrice" />
+                    <outputColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[ExtendedAmount]"
+                      dataType="cy"
+                      externalMetadataColumnId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[ExtendedAmount]"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[ExtendedAmount]"
+                      name="ExtendedAmount" />
+                    <outputColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[UnitPriceDiscountPct]"
+                      dataType="r8"
+                      externalMetadataColumnId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[UnitPriceDiscountPct]"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[UnitPriceDiscountPct]"
+                      name="UnitPriceDiscountPct" />
+                    <outputColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[DiscountAmount]"
+                      dataType="r8"
+                      externalMetadataColumnId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[DiscountAmount]"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[DiscountAmount]"
+                      name="DiscountAmount" />
+                    <outputColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[ProductStandardCost]"
+                      dataType="cy"
+                      externalMetadataColumnId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[ProductStandardCost]"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[ProductStandardCost]"
+                      name="ProductStandardCost" />
+                    <outputColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[TotalProductCost]"
+                      dataType="cy"
+                      externalMetadataColumnId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[TotalProductCost]"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[TotalProductCost]"
+                      name="TotalProductCost" />
+                    <outputColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[SalesAmount]"
+                      dataType="cy"
+                      externalMetadataColumnId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[SalesAmount]"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[SalesAmount]"
+                      name="SalesAmount" />
+                    <outputColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[TaxAmt]"
+                      dataType="cy"
+                      externalMetadataColumnId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[TaxAmt]"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[TaxAmt]"
+                      name="TaxAmt" />
+                    <outputColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[Freight]"
+                      dataType="cy"
+                      externalMetadataColumnId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[Freight]"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[Freight]"
+                      name="Freight" />
+                    <outputColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[CarrierTrackingNumber]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[CarrierTrackingNumber]"
+                      length="25"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[CarrierTrackingNumber]"
+                      name="CarrierTrackingNumber" />
+                    <outputColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[CustomerPONumber]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[CustomerPONumber]"
+                      length="25"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[CustomerPONumber]"
+                      name="CustomerPONumber" />
+                    <outputColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[OrderDate]"
+                      dataType="dbTimeStamp"
+                      externalMetadataColumnId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[OrderDate]"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[OrderDate]"
+                      name="OrderDate" />
+                    <outputColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[DueDate]"
+                      dataType="dbTimeStamp"
+                      externalMetadataColumnId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[DueDate]"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[DueDate]"
+                      name="DueDate" />
+                    <outputColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[ShipDate]"
+                      dataType="dbTimeStamp"
+                      externalMetadataColumnId="Package\cw5\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[ShipDate]"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[ShipDate]"
+                      name="ShipDate" />
+                    <outputColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\cw5\ODBC Source.Outputs[ODBC Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\cw5\Sort"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
+              name="Sort"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the Sort transformation removes rows with duplicate sort values."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the maximum number of threads to use for sorting."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\cw5\Sort.Inputs[Sort Input]"
+                  name="Sort Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\cw5\Sort.Inputs[Sort Input].Columns[Orders_cnt]"
+                      cachedDataType="ui8"
+                      cachedName="Orders_cnt"
+                      lineageId="Package\cw5\Aggregate.Outputs[Aggregate Output 1].Columns[Orders_cnt]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">-1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\cw5\Sort.Inputs[Sort Input].Columns[OrderDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="OrderDate"
+                      lineageId="Package\cw5\Aggregate.Outputs[Aggregate Output 1].Columns[OrderDate]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\cw5\Sort.Outputs[Sort Output]"
+                  isSorted="true"
+                  name="Sort Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\cw5\Sort.Outputs[Sort Output].Columns[Orders_cnt]"
+                      dataType="ui8"
+                      lineageId="Package\cw5\Sort.Outputs[Sort Output].Columns[Orders_cnt]"
+                      name="Orders_cnt"
+                      sortKeyPosition="-1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\cw5\Aggregate.Outputs[Aggregate Output 1].Columns[Orders_cnt]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\cw5\Sort.Outputs[Sort Output].Columns[OrderDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\cw5\Sort.Outputs[Sort Output].Columns[OrderDate]"
+                      name="OrderDate">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\cw5\Aggregate.Outputs[Aggregate Output 1].Columns[OrderDate]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\cw5.Paths[Aggregate Output 1]"
+              endId="Package\cw5\Sort.Inputs[Sort Input]"
+              name="Aggregate Output 1"
+              startId="Package\cw5\Aggregate.Outputs[Aggregate Output 1]" />
+            <path
+              refId="Package\cw5.Paths[Data Conversion Output]"
+              endId="Package\cw5\Aggregate.Inputs[Aggregate Input 1]"
+              name="Data Conversion Output"
+              startId="Package\cw5\Data Conversion.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\cw5.Paths[ODBC Source Output]"
+              endId="Package\cw5\Data Conversion.Inputs[Data Conversion Input]"
+              name="ODBC Source Output"
+              startId="Package\cw5\ODBC Source.Outputs[ODBC Source Output]" />
+            <path
+              refId="Package\cw5.Paths[Sort Output]"
+              endId="Package\cw5\Copy Column.Inputs[Copy Column Input]"
+              name="Sort Output"
+              startId="Package\cw5\Sort.Outputs[Sort Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
   </DTS:Executables>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
@@ -3161,7 +4053,11 @@ where [refTable].[CurrencyKey] = ?</property>
         <NodeLayout
           Size="99,42"
           Id="Package\cw4"
-          TopLeft="279,6" />
+          TopLeft="242,4" />
+        <NodeLayout
+          Size="99,42"
+          Id="Package\cw5"
+          TopLeft="372,3" />
       </GraphLayout>
     </LayoutInfo>
   </Package>
@@ -3550,7 +4446,9 @@ where [refTable].[CurrencyKey] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -3572,7 +4470,9 @@ where [refTable].[CurrencyKey] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -3630,7 +4530,9 @@ where [refTable].[CurrencyKey] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -3664,7 +4566,9 @@ where [refTable].[CurrencyKey] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -3698,7 +4602,9 @@ where [refTable].[CurrencyKey] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -3732,7 +4638,9 @@ where [refTable].[CurrencyKey] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -3766,7 +4674,9 @@ where [refTable].[CurrencyKey] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -3788,7 +4698,9 @@ where [refTable].[CurrencyKey] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -3810,7 +4722,9 @@ where [refTable].[CurrencyKey] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -3839,6 +4753,137 @@ where [refTable].[CurrencyKey] = ?</property>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\cw4\DimCustomer">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\cw5">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="149,42"
+          Id="Package\cw5\ODBC Source"
+          TopLeft="498,98" />
+        <NodeLayout
+          Size="161,42"
+          Id="Package\cw5\Data Conversion"
+          TopLeft="492,209" />
+        <NodeLayout
+          Size="130,42"
+          Id="Package\cw5\Aggregate"
+          TopLeft="507,294" />
+        <NodeLayout
+          Size="99,42"
+          Id="Package\cw5\Sort"
+          TopLeft="527,373" />
+        <NodeLayout
+          Size="146,42"
+          Id="Package\cw5\Copy Column"
+          TopLeft="502,469" />
+        <EdgeLayout
+          Id="Package\cw5.Paths[ODBC Source Output]"
+          TopLeft="572.5,140">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,69"
+              Start="0,0"
+              End="0,61.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,61.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\cw5.Paths[Data Conversion Output]"
+          TopLeft="572.25,251">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,43"
+              Start="0,0"
+              End="0,35.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\cw5.Paths[Aggregate Output 1]"
+          TopLeft="574.25,336">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,37"
+              Start="0,0"
+              End="0,29.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\cw5.Paths[Sort Output]"
+          TopLeft="575.75,415">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,54"
+              Start="0,0"
+              End="0,46.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,46.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-8,15.25,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\cw5\ODBC Source">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
